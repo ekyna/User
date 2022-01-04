@@ -8,7 +8,7 @@ use Ekyna\Component\Resource\Event\ResourceEventInterface;
 use Ekyna\Component\Resource\Event\ResourceMessage;
 use Ekyna\Component\Resource\Exception\UnexpectedTypeException;
 use Ekyna\Component\User\Model\UserInterface;
-use Ekyna\Component\User\Service\SecurityUtil;
+use Ekyna\Component\User\Service\Security\SecurityUtil;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use function sprintf;

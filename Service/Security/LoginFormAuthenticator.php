@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ekyna\Component\User\Service;
+namespace Ekyna\Component\User\Service\Security;
 
 use Ekyna\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

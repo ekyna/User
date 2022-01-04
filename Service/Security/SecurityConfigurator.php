@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ekyna\Component\User\Service;
+namespace Ekyna\Component\User\Service\Security;
 
 use ReflectionProperty;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
