@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ekyna\Component\User\Model;
 
+use DateTimeInterface;
 use Ekyna\Component\Resource\Model\TimestampableTrait;
 
 use function serialize;
@@ -18,10 +19,11 @@ abstract class AbstractUser implements UserInterface
 {
     use TimestampableTrait;
 
-    protected ?int    $id       = null;
-    protected ?string $email    = null;
-    protected ?string $password = null;
-    protected bool    $enabled  = false;
+    protected ?int               $id        = null;
+    protected ?string            $email     = null;
+    protected ?string            $password  = null;
+    protected bool               $enabled   = false;
+    protected ?DateTimeInterface $lastLogin = null;
 
     /* ---------- (non mapped) ---------- */
     protected ?string $plainPassword = null;
@@ -81,6 +83,18 @@ abstract class AbstractUser implements UserInterface
     public function setPlainPassword(?string $plainPassword): UserInterface
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?DateTimeInterface
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?DateTimeInterface $lastLogin): UserInterface
+    {
+        $this->lastLogin = $lastLogin;
 
         return $this;
     }
