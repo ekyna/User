@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ekyna\Component\User\Model;
 
 use DateTimeInterface;
+use Ekyna\Component\Resource\Model\AbstractResource;
 use Ekyna\Component\Resource\Model\TimestampableTrait;
 
 use function serialize;
@@ -15,11 +16,10 @@ use function unserialize;
  * @package Ekyna\Component\User
  * @author  Étienne Dauvergne <contact@ekyna.com>
  */
-abstract class AbstractUser implements UserInterface
+abstract class AbstractUser extends AbstractResource implements UserInterface
 {
     use TimestampableTrait;
 
-    protected ?int               $id        = null;
     protected ?string            $email     = null;
     protected ?string            $password  = null;
     protected bool               $enabled   = false;
@@ -32,11 +32,6 @@ abstract class AbstractUser implements UserInterface
     public function __toString(): string
     {
         return $this->email ?: 'New user';
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function setEmail(string $email): UserInterface

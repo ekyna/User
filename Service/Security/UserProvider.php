@@ -58,16 +58,8 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
         }
 
         /** @var UserInterface $user */
-        $email = $user->getEmail();
 
-        if (null === $user = $this->findUserByEmail($email)) {
-            $exception = new UserNotFoundException(sprintf('User with email "%s" not found.', $email));
-            $exception->setUserIdentifier($email);
-
-            throw $exception;
-        }
-
-        return $user;
+        return $this->findUserByEmail($user->getEmail());
     }
 
     public function supportsClass(string $class): bool
@@ -99,8 +91,9 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
             return $user;
         }
 
-        throw new UserNotFoundException(
-            sprintf('No user registered for email "%s".', $email)
-        );
+        $exception = new UserNotFoundException(sprintf('User with email "%s" not found.', $email));
+        $exception->setUserIdentifier($email);
+
+        throw $exception;
     }
 }
