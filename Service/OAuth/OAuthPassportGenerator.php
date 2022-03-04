@@ -19,7 +19,7 @@ use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 /**
@@ -54,7 +54,7 @@ class OAuthPassportGenerator
         OAuth2ClientInterface $client,
         string                $clientName,
         bool                  $createUser
-    ): PassportInterface {
+    ): Passport {
         $loader = function () use ($oAuthToken, $client, $clientName, $createUser) {
             $oAuthUser = $client->fetchUserFromToken($oAuthToken);
 

@@ -21,20 +21,11 @@ abstract class AbstractOAuthToken implements OAuthTokenInterface
     protected DateTime       $createdAt;
     protected ?DateTime      $expiresAt  = null;
 
-
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new DateTime();
     }
 
-    /**
-     * Returns the id.
-     *
-     * @return int
-     */
     public function getId(): ?int
     {
         return $this->id;

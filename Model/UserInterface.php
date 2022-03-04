@@ -8,16 +8,15 @@ use DateTimeInterface;
 use Ekyna\Component\Resource\Model\ResourceInterface;
 use Ekyna\Component\Resource\Model\TimestampableInterface;
 use Serializable;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
 
 /**
  * Interface UserInterface
  * @package Ekyna\Component\User
  * @author  Étienne Dauvergne <contact@ekyna.com>
- *
- * @TODO (Sf 6) implements PasswordAuthenticatedUserInterface
  */
-interface UserInterface extends SymfonyUser, TimestampableInterface, ResourceInterface, Serializable
+interface UserInterface extends PasswordAuthenticatedUserInterface, SymfonyUser, TimestampableInterface, ResourceInterface, Serializable
 {
     public function setEmail(string $email): UserInterface;
 

@@ -17,7 +17,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 /**
@@ -47,7 +46,7 @@ final class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $this->targetRoute = $targetRoute;
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
         $password = $request->request->get('password', '');
@@ -58,7 +57,7 @@ final class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($email, [$this->userProvider, 'loadUserByIdentifier']),
             new PasswordCredentials($password),
             [
-                new CsrfTokenBadge('authenticate', $request->get('_csrf_token')),
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
                 new RememberMeBadge(),
                 new PasswordUpgradeBadge($password, $this->userProvider)
             ],

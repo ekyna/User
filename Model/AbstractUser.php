@@ -114,7 +114,7 @@ abstract class AbstractUser extends AbstractResource implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return $this->getUserIdentifier();
     }
 
     public function eraseCredentials()

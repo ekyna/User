@@ -9,7 +9,7 @@ use Ekyna\Component\Resource\Event\ResourceMessage;
 use Ekyna\Component\Resource\Exception\UnexpectedTypeException;
 use Ekyna\Component\User\Model\UserInterface;
 use Ekyna\Component\User\Service\Security\SecurityUtil;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use function sprintf;
 
@@ -20,11 +20,10 @@ use function sprintf;
  */
 abstract class UserEventSubscriber
 {
-    protected UserPasswordEncoderInterface $passwordHasher;
+    protected UserPasswordHasherInterface $passwordHasher;
     protected SecurityUtil                $securityUtil;
 
-    // @TODO (Sf 6) Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface
-    public function setPasswordHasher(UserPasswordEncoderInterface $encoder): void
+    public function setPasswordHasher(UserPasswordHasherInterface $encoder): void
     {
         $this->passwordHasher = $encoder;
     }
@@ -74,7 +73,7 @@ abstract class UserEventSubscriber
             return;
         }
 
-        $encoded = $this->passwordHasher->encodePassword($user, $plain);
+        $encoded = $this->passwordHasher->hashPassword($user, $plain);
 
         $user
             ->setPassword($encoded)
@@ -83,10 +82,6 @@ abstract class UserEventSubscriber
 
     /**
      * Returns the user form the event.
-     *
-     * @param ResourceEventInterface $event
-     *
-     * @return UserInterface
      */
     protected function getUserFromEvent(ResourceEventInterface $event): UserInterface
     {

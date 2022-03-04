@@ -38,11 +38,6 @@ class SecurityController
 
     /**
      * Security login.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     * @noinspection PhpDocMissingThrowsInspection
      */
     public function login(Request $request): Response
     {
@@ -50,7 +45,6 @@ class SecurityController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         $content = $this->twig->render($this->config['template'], $this->getLoginParameters());
 
         $response = new Response($content);
@@ -61,8 +55,6 @@ class SecurityController
 
     /**
      * Returns the login form vars.
-     *
-     * @return array
      */
     protected function getLoginParameters(): array
     {
@@ -81,8 +73,6 @@ class SecurityController
 
     /**
      * Security check.
-     *
-     * @return Response
      */
     public function check(): Response
     {
@@ -93,8 +83,6 @@ class SecurityController
 
     /**
      * Security logout.
-     *
-     * @return Response
      */
     public function logout(): Response
     {

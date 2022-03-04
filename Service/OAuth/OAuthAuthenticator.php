@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 /**
  * Class OAuthAuthenticator
@@ -50,7 +50,7 @@ class OAuthAuthenticator extends OAuth2Authenticator
         return $request->attributes->get('_route') === $this->config['check_route'];
     }
 
-    public function authenticate(Request $request): PassportInterface
+    public function authenticate(Request $request): Passport
     {
         $client = $this->clientRegistry->getClient($this->config['client_name']);
 

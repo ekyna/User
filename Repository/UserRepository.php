@@ -14,9 +14,6 @@ use Ekyna\Component\User\Model\UserInterface;
  */
 class UserRepository extends ResourceRepository implements UserRepositoryInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function findOneByEmail(string $email, bool $enabled = true): ?UserInterface
     {
         $qb = $this->createQueryBuilder('u');
@@ -30,7 +27,6 @@ class UserRepository extends ResourceRepository implements UserRepositoryInterfa
             $parameters['enabled'] = true;
         }
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         return $qb
             ->andWhere($qb->expr()->eq('u.email', ':email'))
             ->getQuery()

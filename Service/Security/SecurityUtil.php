@@ -13,8 +13,6 @@ class SecurityUtil
 {
     /**
      * Generate a new user password (8 chars).
-     *
-     * @return string The generated password.
      */
     public function generatePassword(): string
     {
@@ -23,8 +21,6 @@ class SecurityUtil
 
     /**
      * Generate a new user token (128 chars).
-     *
-     * @return string The generated token.
      */
     public function generateToken(): string
     {

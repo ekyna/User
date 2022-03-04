@@ -19,8 +19,6 @@ interface UserRepositoryInterface extends ResourceRepositoryInterface
      *
      * @param string $email   The user's email address
      * @param bool   $enabled Whether to filter enabled users
-     *
-     * @return UserInterface|null
      */
     public function findOneByEmail(string $email, bool $enabled = true): ?UserInterface;
 }

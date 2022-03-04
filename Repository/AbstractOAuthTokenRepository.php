@@ -44,7 +44,6 @@ abstract class AbstractOAuthTokenRepository extends EntityRepository implements 
             ->andWhere($qb->expr()->eq('t.owner', ':owner'))
             ->andWhere($qb->expr()->eq('t.user', ':user'));
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         return $qb
             ->setMaxResults(1)
             ->getQuery()
@@ -63,7 +62,6 @@ abstract class AbstractOAuthTokenRepository extends EntityRepository implements 
             ->andWhere($qb->expr()->eq('t.owner', ':owner'))
             ->andWhere($qb->expr()->eq('t.identifier', ':identifier'));
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         return $qb
             ->setMaxResults(1)
             ->getQuery()
