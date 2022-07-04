@@ -124,22 +124,29 @@ abstract class AbstractUser extends AbstractResource implements UserInterface
 
     public function serialize(): ?string
     {
-        return serialize([
+        return serialize($this->__serialize());
+    }
+
+    public function __serialize(): array
+    {
+        return [
             $this->id,
             $this->email,
             $this->password,
-        ]);
+        ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function unserialize($data): void
+    public function unserialize(string $data): void
+    {
+        $this->__unserialize(unserialize($data, ['allowed_classes' => false]));
+    }
+
+    public function __unserialize(array $data): void
     {
         [
             $this->id,
             $this->email,
             $this->password,
-        ] = unserialize($data, ['allowed_classes' => false]);
+        ] = $data;
     }
 }

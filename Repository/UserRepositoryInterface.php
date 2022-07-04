@@ -11,6 +11,8 @@ use Ekyna\Component\User\Model\UserInterface;
  * Interface UserRepositoryInterface
  * @package Ekyna\Component\User\Repository
  * @author  Étienne Dauvergne <contact@ekyna.com>
+ *
+ * @implements ResourceRepositoryInterface<UserInterface>
  */
 interface UserRepositoryInterface extends ResourceRepositoryInterface
 {
