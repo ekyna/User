@@ -7,6 +7,7 @@ namespace Ekyna\Component\User\EventListener;
 use Ekyna\Component\Resource\Event\ResourceEventInterface;
 use Ekyna\Component\Resource\Event\ResourceMessage;
 use Ekyna\Component\Resource\Exception\UnexpectedTypeException;
+use Ekyna\Component\Resource\Persistence\PersistenceHelperInterface;
 use Ekyna\Component\User\Model\UserInterface;
 use Ekyna\Component\User\Service\Security\SecurityUtil;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,8 +21,9 @@ use function sprintf;
  */
 abstract class UserEventSubscriber
 {
-    protected UserPasswordHasherInterface $passwordHasher;
-    protected SecurityUtil                $securityUtil;
+    protected readonly UserPasswordHasherInterface $passwordHasher;
+    protected readonly SecurityUtil                $securityUtil;
+    protected readonly PersistenceHelperInterface  $persistenceHelper;
 
     public function setPasswordHasher(UserPasswordHasherInterface $encoder): void
     {
@@ -31,6 +33,11 @@ abstract class UserEventSubscriber
     public function setSecurityUtil(SecurityUtil $securityUtil): void
     {
         $this->securityUtil = $securityUtil;
+    }
+
+    public function setPersistenceHelper(PersistenceHelperInterface  $persistenceHelper): void
+    {
+        $this->persistenceHelper = $persistenceHelper;
     }
 
     public function onPreCreate(ResourceEventInterface $event): void
@@ -78,6 +85,8 @@ abstract class UserEventSubscriber
         $user
             ->setPassword($encoded)
             ->eraseCredentials();
+
+        $this->persistenceHelper->persistAndRecompute($user, false);
     }
 
     /**
