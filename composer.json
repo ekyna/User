@@ -29,7 +29,7 @@
         "league/uri": "^6.0",
         "symfony/routing": "^5.0",
         "twig/twig": "^3.0",
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.5",
         "knpuniversity/oauth2-client-bundle": "^2.8"
     },
     "autoload": {

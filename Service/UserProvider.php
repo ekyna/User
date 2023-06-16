@@ -48,6 +48,11 @@ final class UserProvider implements UserProviderInterface
         $this->initialized = false;
     }
 
+    public function onClear(): void
+    {
+        $this->reset();
+    }
+
     /**
      * Loads the user once.
      */
